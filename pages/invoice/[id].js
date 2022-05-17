@@ -24,7 +24,7 @@ const DetailedInvoice = () => {
 
       <Link href='/'>
         <div className='flex items-center cursor-pointer mb-6'>
-          <Image src='/images/icon-arrow-left.svg' width={8} height={8} />
+          <Image src='/images/icon-arrow-left.svg' width={8} height={8} alt="" />
           <p className='ml-4'>Go back</p>
         </div>
       </Link>

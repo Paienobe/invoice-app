@@ -15,7 +15,12 @@ const InvoiceListHeader = ({ setShowForm }) => {
 
       <div className='flex items-center'>
         <p className='text-sm font-semibold mr-2'>Filter</p>
-        <Image src='/images/icon-arrow-down.svg' width={10} height={8} />
+        <Image
+          src='/images/icon-arrow-down.svg'
+          width={10}
+          height={8}
+          alt='arrow'
+        />
       </div>
 
       <div
@@ -25,7 +30,7 @@ const InvoiceListHeader = ({ setShowForm }) => {
         }}
       >
         <div className='w-7 h-7 flex items-center justify-center rounded-full bg-slate-100'>
-          <Image src='/images/icon-plus.svg' width={10} height={10} />
+          <Image src='/images/icon-plus.svg' width={10} height={10} alt='+' />
         </div>
         <p className='font-semibold text-sm ml-2'>New</p>
       </div>
