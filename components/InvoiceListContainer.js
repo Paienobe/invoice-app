@@ -6,7 +6,7 @@ const InvoiceListContainer = () => {
   const { state } = useGlobalContext()
 
   return (
-    <div>
+    <div className='lg:w-4/5'>
       {state.map((item) => {
         return <InvoiceListItem {...item} key={item.id} />
       })}
