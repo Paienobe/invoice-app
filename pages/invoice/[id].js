@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { useGlobalContext } from '../../context/globalContext'
 import Link from 'next/link'
@@ -15,23 +15,40 @@ const DetailedInvoice = () => {
   const requiredInvoice = state.find((invoice) => {
     return invoice?.id?.toLowerCase() === invoiceID
   })
+  const [displayFooter, setDisplayFooter] = useState(true)
+
+  useEffect(() => {
+    if (window.innerWidth >= 640) {
+      setDisplayFooter(false)
+    }
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 640) {
+        setDisplayFooter(false)
+      }
+    })
+  }, [displayFooter])
 
   return (
-    <div className='bg-slate-900 min-h-screen p-4 text-slate-100 relative font-Jost'>
+    <div className='bg-slate-900 min-h-screen p-4 text-slate-100 relative font-Jost pt-20 sm:pt-28 sm:px-14 lg:px-80 lg:pt-8'>
       <Head>
         <title>Invoice/{invoiceID?.toUpperCase()}</title>
       </Head>
 
       <Link href='/'>
         <div className='flex items-center cursor-pointer mb-6'>
-          <Image src='/images/icon-arrow-left.svg' width={8} height={8} alt="" />
+          <Image
+            src='/images/icon-arrow-left.svg'
+            width={8}
+            height={8}
+            alt=''
+          />
           <p className='ml-4'>Go back</p>
         </div>
       </Link>
-
       <InvoiceStatus {...requiredInvoice} />
       <InvoiceBody requiredInvoice={requiredInvoice} />
-      <InvoiceFooter />
+      {displayFooter && <InvoiceFooter />}
     </div>
   )
 }
