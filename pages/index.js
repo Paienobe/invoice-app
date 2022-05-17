@@ -17,7 +17,7 @@ export default function Home() {
 
       <main className='p-4 relative sm:p-12 lg:px-48 mt-16 lg:flex lg:flex-col items-center'>
         <InvoiceListHeader setShowForm={setShowForm} />
-        <InvoiceListContainer />
+        <InvoiceListContainer showForm={showForm} />
         <InvoiceForm showForm={showForm} setShowForm={setShowForm} />
       </main>
     </div>
