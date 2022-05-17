@@ -5,18 +5,21 @@ import { GoPrimitiveDot } from 'react-icons/go'
 const InvoiceListItem = ({ id, paymentDue, status, total, clientName }) => {
   return (
     <Link href={`/invoice/${id}`}>
-      <div className='bg-slate-800 p-4 rounded-lg my-4 cursor-pointer'>
-        <div className='flex items-center justify-between text-sm'>
+      <div className='bg-slate-800 p-4 rounded-lg my-4 cursor-pointer sm:flex sm:items-center sm:justify-between sm:border-2 border-transparent sm:hover:border-purple-600 lg:w-[100%]'>
+        <div className='flex items-center justify-between sm:justify-around text-sm sm:w-1/2'>
           <p className='font-bold'>
             <span className='text-slate-500'>#</span>
             {id}
           </p>
+          <p className='text-slate-400 text-sm hidden sm:block'>
+            Due {paymentDue}
+          </p>
           <p className='text-slate-400'>{clientName}</p>
         </div>
 
-        <div className='flex items-center justify-between mt-4'>
-          <div>
-            <p className='text-slate-400 text-sm'>Due {paymentDue}</p>
+        <div className='flex items-center justify-between mt-4 sm:w-1/2 sm:mt-0'>
+          <div className='sm:flex sm:items-center sm:justify-around sm:w-2/3 '>
+            <p className='text-slate-400 text-sm sm:hidden'>Due {paymentDue}</p>
             <p className='font-bold text-lg'>£{total}</p>
           </div>
 
