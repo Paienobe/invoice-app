@@ -7,14 +7,14 @@ const InvoiceListItem = ({ id, paymentDue, status, total, clientName }) => {
     <Link href={`/invoice/${id}`}>
       <div className='bg-slate-800 p-4 rounded-lg my-4 cursor-pointer sm:flex sm:items-center sm:justify-between sm:border-2 border-transparent sm:hover:border-purple-600 lg:w-[100%]'>
         <div className='flex items-center justify-between sm:justify-around text-sm sm:w-1/2'>
-          <p className='font-bold'>
+          <p className='font-bold sm:w-1/3'>
             <span className='text-slate-500'>#</span>
             {id}
           </p>
-          <p className='text-slate-400 text-sm hidden sm:block'>
+          <p className='text-slate-400 text-sm hidden sm:block sm:w-1/3'>
             Due {paymentDue}
           </p>
-          <p className='text-slate-400'>{clientName}</p>
+          <p className='text-slate-400 sm:w-1/3'>{clientName}</p>
         </div>
 
         <div className='flex items-center justify-between mt-4 sm:w-1/2 sm:mt-0'>

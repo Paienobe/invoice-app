@@ -3,22 +3,24 @@ import React from 'react'
 const InvoiceBody = ({ requiredInvoice }) => {
   return (
     <div className='bg-slate-800 p-4 my-4 rounded-lg mb-24'>
-      <div>
-        <p className='font-bold'>
-          <span className='text-slate-500'>#</span>
-          {requiredInvoice?.id}
-        </p>
-        <p className='text-slate-400'>{requiredInvoice?.description}</p>
+      <div className='sm:flex sm:items-start sm:justify-between'>
+        <div>
+          <p className='font-bold'>
+            <span className='text-slate-500'>#</span>
+            {requiredInvoice?.id}
+          </p>
+          <p className='text-slate-400'>{requiredInvoice?.description}</p>
+        </div>
+
+        <div className='text-sm text-slate-400 my-6 sm:mt-0'>
+          <p>{requiredInvoice?.senderAddress.street}</p>
+          <p>{requiredInvoice?.senderAddress.city}</p>
+          <p>{requiredInvoice?.senderAddress.postCode}</p>
+          <p>{requiredInvoice?.senderAddress.country}</p>
+        </div>
       </div>
 
-      <div className='text-sm text-slate-400 my-6'>
-        <p>{requiredInvoice?.senderAddress.street}</p>
-        <p>{requiredInvoice?.senderAddress.city}</p>
-        <p>{requiredInvoice?.senderAddress.postCode}</p>
-        <p>{requiredInvoice?.senderAddress.country}</p>
-      </div>
-
-      <div className='flex justify-between'>
+      <div className='flex justify-between flex-wrap sm:mb-8'>
         <div className='flex flex-col justify-between'>
           <div>
             <p className='text-slate-400'>Invoice Date</p>
@@ -51,11 +53,11 @@ const InvoiceBody = ({ requiredInvoice }) => {
             </p>
           </div>
         </div>
-      </div>
 
-      <div className='my-8'>
-        <p className='text-slate-400'>Sent to</p>
-        <p className='font-bold text-lg'>{requiredInvoice?.clientEmail}</p>
+        <div className='my-8 sm:my-0'>
+          <p className='text-slate-400'>Sent to</p>
+          <p className='font-bold text-lg'>{requiredInvoice?.clientEmail}</p>
+        </div>
       </div>
 
       <div className='bg-slate-700 rounded-lg overflow-hidden'>

@@ -1,11 +1,17 @@
-import React from 'react'
+import React, { useRef, useState } from 'react'
+import { AiFillDelete } from 'react-icons/ai'
 
 const InvoiceForm = ({ showForm, setShowForm }) => {
+  const itemsContainer = useRef(null)
+  const [itemsList, setItemsList] = useState([])
+
   return (
     <form
       className={`absolute top-0 h-[90vh] overflow-y-scroll z-10 ${
-        !showForm ? '-left-full mr-96' : 'left-0 right-0'
-      } px-4 bg-slate-900 text-slate-400 invoice-form`}
+        !showForm
+          ? '-left-full mr-96'
+          : 'left-0 right-0 sm:right-[20vw] sm:border-4 sm:border-purple-700 sm:border-opacity-70'
+      } px-4 bg-slate-900 text-slate-400 invoice-form sm:py-10 sm:px-20 lg:px-56 lg:h-screen sm:rounded-r-3xl`}
     >
       <h1 className='text-xl font-bold my-4 text-slate-100'>Create Invoice</h1>
       <div className=''>
@@ -119,7 +125,62 @@ const InvoiceForm = ({ showForm, setShowForm }) => {
 
           <div>
             <h2 className='font-semibold mb-4'>ItemList</h2>
-            <button className='bg-slate-800 w-full rounded-full py-2 font-bold text-sm'>
+            <div ref={itemsContainer}>
+              {itemsList.map((item, index) => {
+                return (
+                  <div
+                    key={index}
+                    className='my-4 sm:flex sm:items-center sm:justify-between'
+                  >
+                    <div className='sm:mr-4 sm:w-2/3'>
+                      <p>Item Name</p>
+                      <input
+                        type='text'
+                        className='w-full bg-slate-800 p-2 rounded-lg my-2 outline-none mb-4 sm:my-0'
+                      />
+                    </div>
+                    <div className='flex items-start'>
+                      <div className='w-1/2 flex items-center'>
+                        <div className='mr-4'>
+                          <p>Qty.</p>
+                          <input
+                            type='text'
+                            className='w-full bg-slate-800 p-2 rounded-lg outline-none'
+                          />
+                        </div>
+                        <div>
+                          <p>Price</p>
+                          <input
+                            type='text'
+                            className='w-full bg-slate-800 p-2 rounded-lg outline-none'
+                          />
+                        </div>
+                      </div>
+
+                      <div className='flex items-center w-1/2 ml-8'>
+                        <div className='w-1/2'>
+                          <p>Total</p>
+                          <p>0</p>
+                        </div>
+                        <div className='w-1/2 hover:text-red-500 cursor-pointer'>
+                          <AiFillDelete />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+            <button
+              className='bg-slate-800 w-full rounded-full py-2 font-bold text-sm'
+              onClick={(e) => {
+                e.preventDefault()
+                const itemForm = <p></p>
+                setItemsList([...itemsList, Math.floor(Math.random())])
+                console.log(itemsList)
+                // itemsContainer.current.appendChild(itemForm)
+              }}
+            >
               + Add New Item
             </button>
           </div>
