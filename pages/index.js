@@ -15,10 +15,10 @@ export default function Home() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <main className='p-4 relative sm:p-12 lg:px-48 mt-16 lg:flex lg:flex-col items-center'>
+      <main className='p-4 relative sm:p-12 lg:px-48 mt-16 lg:flex lg:flex-col items-center lg:mt-0'>
         <InvoiceListHeader setShowForm={setShowForm} />
-        <InvoiceListContainer showForm={showForm} />
-        <InvoiceForm showForm={showForm} setShowForm={setShowForm} />
+        <InvoiceListContainer showForm={showForm} setShowForm={setShowForm} />
+        {/* <InvoiceForm showForm={showForm} setShowForm={setShowForm} /> */}
       </main>
     </div>
   )

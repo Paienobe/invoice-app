@@ -8,6 +8,10 @@
   transition: all 0.25s ease-in-out;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 .invoice-form::-webkit-scrollbar {
   display: none;
 }
