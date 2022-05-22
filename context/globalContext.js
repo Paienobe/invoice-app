@@ -20,10 +20,22 @@ const AppProvider = ({ children }) => {
     }
   }, [state])
 
+  const createInvoice = (formContent, generatedItems, selectedTerms) => {
+    dispatch({
+      type: 'CREATE_INVOICE',
+      payload: {
+        content: formContent,
+        items: generatedItems,
+        terms: selectedTerms,
+      },
+    })
+  }
+
   return (
     <AppContext.Provider
       value={{
         state,
+        createInvoice,
       }}
     >
       {children}
