@@ -62,14 +62,22 @@ const InvoiceBody = ({ requiredInvoice }) => {
 
       <div className='bg-slate-700 rounded-lg overflow-hidden'>
         <div>
+          <div className='hidden sm:flex items-center px-4 pt-4'>
+            <p className='w-2/5'>Item Name</p>
+            <p className='w-1/5'>QTY</p>
+            <p className='w-1/5'>Price</p>
+            <p className='w-2/5 text-right'>Total</p>
+          </div>
           {requiredInvoice?.items.map((item, index) => {
             return (
               <div
                 className='font-semibold flex items-center justify-between px-4 py-6 text-sm'
                 key={index}
               >
-                <p>{item.name}</p>
-                <p>£{item.price}</p>
+                <p className='sm:w-2/5'>{item.name}</p>
+                <p className='hidden sm:block sm:w-1/5'>{item.quantity}</p>
+                <p className='hidden sm:block sm:w-1/5'>£{item.price}</p>
+                <p className='sm:w-2/5 sm:text-right'>£{item.total}</p>
               </div>
             )
           })}
