@@ -63,4 +63,20 @@ export const reducer = (state, action) => {
     }
     return [...state, newInvoice]
   }
+
+  if (action.type === 'MARK_AS_PAID') {
+    const newState = state.map((invoice) => {
+      if (invoice.id.toLowerCase() === action.payload.id.toLowerCase()) {
+        return { ...invoice, status: 'paid' }
+      } else return invoice
+    })
+    return newState
+  }
+
+  if (action.type === 'DELETE') {
+    const newState = state.filter((invoice) => {
+      return invoice.id.toLowerCase() !== action.payload.id.toLowerCase()
+    })
+    return newState
+  }
 }

@@ -2,7 +2,7 @@ import React from 'react'
 import { GoPrimitiveDot } from 'react-icons/go'
 import InvoiceFooter from './InvoiceFooter'
 
-const InvoiceStatus = ({ status }) => {
+const InvoiceStatus = ({ status, id, setDeleteInvoice }) => {
   return (
     <div className='flex items-center justify-between bg-slate-800 p-4 rounded-lg'>
       <div className='flex items-center justify-between w-full sm:w-1/4'>
@@ -30,7 +30,11 @@ const InvoiceStatus = ({ status }) => {
           </p>
         </div>
       </div>
-      <InvoiceFooter />
+      <InvoiceFooter
+        status={status}
+        id={id}
+        setDeleteInvoice={setDeleteInvoice}
+      />
     </div>
   )
 }
