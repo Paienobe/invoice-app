@@ -8,7 +8,6 @@ const FormButtons = ({ setShowForm }) => {
         onClick={(e) => {
           e.preventDefault()
           setShowForm(false)
-          // invoiceFormRef.current.reset()
         }}
       >
         Discard

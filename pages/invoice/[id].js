@@ -7,6 +7,7 @@ import InvoiceStatus from '../../components/Invoice components/InvoiceStatus'
 import InvoiceBody from '../../components/Invoice components/InvoiceBody'
 import InvoiceFooter from '../../components/Invoice components/InvoiceFooter'
 import Head from 'next/head'
+import DeleteModal from '../../components/DeleteModal'
 
 const DetailedInvoice = () => {
   const { state } = useGlobalContext()
@@ -16,6 +17,11 @@ const DetailedInvoice = () => {
     return invoice?.id?.toLowerCase() === invoiceID
   })
   const [displayFooter, setDisplayFooter] = useState(true)
+  const [deleteInvoice, setDeleteInvoice] = useState(false)
+
+  const redirectToHomePage = () => {
+    router.push('/')
+  }
 
   useEffect(() => {
     if (window.innerWidth >= 640) {
@@ -46,9 +52,21 @@ const DetailedInvoice = () => {
           <p className='ml-4'>Go back</p>
         </div>
       </Link>
-      <InvoiceStatus {...requiredInvoice} />
+      <InvoiceStatus {...requiredInvoice} setDeleteInvoice={setDeleteInvoice} />
       <InvoiceBody requiredInvoice={requiredInvoice} />
-      {displayFooter && <InvoiceFooter />}
+      {displayFooter && (
+        <InvoiceFooter
+          {...requiredInvoice}
+          setDeleteInvoice={setDeleteInvoice}
+        />
+      )}
+      {deleteInvoice && (
+        <DeleteModal
+          {...requiredInvoice}
+          setDeleteInvoice={setDeleteInvoice}
+          redirectToHomePage={redirectToHomePage}
+        />
+      )}
     </div>
   )
 }

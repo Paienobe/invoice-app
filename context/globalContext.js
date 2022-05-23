@@ -31,11 +31,21 @@ const AppProvider = ({ children }) => {
     })
   }
 
+  const markInvoiceAsPaid = (id) => {
+    dispatch({ type: 'MARK_AS_PAID', payload: { id } })
+  }
+
+  const deleteInvoice = (id) => {
+    dispatch({ type: 'DELETE', payload: { id } })
+  }
+
   return (
     <AppContext.Provider
       value={{
         state,
         createInvoice,
+        markInvoiceAsPaid,
+        deleteInvoice,
       }}
     >
       {children}
