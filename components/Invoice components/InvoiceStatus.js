@@ -1,10 +1,14 @@
 import React from 'react'
 import { GoPrimitiveDot } from 'react-icons/go'
+import { useGlobalContext } from '../../context/globalContext'
 import InvoiceFooter from './InvoiceFooter'
 
 const InvoiceStatus = ({ status, id, setDeleteInvoice, setShowForm }) => {
+  const { invoiceStyle } = useGlobalContext()
   return (
-    <div className='flex items-center justify-between bg-slate-800 p-4 rounded-lg'>
+    <div
+      className={`flex items-center justify-between ${invoiceStyle} p-4 rounded-lg`}
+    >
       <div className='flex items-center justify-between w-full sm:w-1/4'>
         <p className='sm:mr-4'>Status</p>
         <div

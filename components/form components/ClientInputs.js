@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
 import FormItem from './FormItem'
+import { useGlobalContext } from '../../context/globalContext'
 
 const ClientInputs = ({
   itemsList,
@@ -13,6 +14,7 @@ const ClientInputs = ({
   requiredInvoice,
 }) => {
   const [showTerms, setShowTerms] = useState(false)
+  const { inputStyles, theme } = useGlobalContext()
   return (
     <div className='bill-to'>
       <p className='text-purple-700 text-sm font-bold mt-4 mb-4'>Bill To</p>
@@ -20,7 +22,7 @@ const ClientInputs = ({
       <p>Client&apos;s Name</p>
       <input
         type='text'
-        className='w-full p-2 bg-slate-800 rounded-lg mb-4'
+        className={`w-full p-2 ${inputStyles} rounded-lg mb-4`}
         name='client_name'
         required
         defaultValue={requiredInvoice?.clientName || ''}
@@ -29,7 +31,7 @@ const ClientInputs = ({
       <p>Client&apos;s Email</p>
       <input
         type='email'
-        className='w-full p-2 bg-slate-800 rounded-lg mb-4'
+        className={`w-full p-2 ${inputStyles} rounded-lg mb-4`}
         placeholder='e.g. email@example.com'
         name='client_email'
         required
@@ -39,7 +41,7 @@ const ClientInputs = ({
       <p>Street Address</p>
       <input
         type='text'
-        className='w-full p-2 bg-slate-800 rounded-lg'
+        className={`w-full p-2 ${inputStyles} rounded-lg`}
         name='client_street'
         required
         defaultValue={requiredInvoice?.clientAddress.street || ''}
@@ -50,7 +52,7 @@ const ClientInputs = ({
           <p>City</p>
           <input
             type='text'
-            className='p-2 bg-slate-800 rounded-lg w-full outline-none'
+            className={`p-2 ${inputStyles} rounded-lg w-full outline-none`}
             name='client_city'
             required
             defaultValue={requiredInvoice?.clientAddress.city || ''}
@@ -61,7 +63,7 @@ const ClientInputs = ({
           <p>Post Code</p>
           <input
             type='text'
-            className='p-2 bg-slate-800 rounded-lg w-full outline-none'
+            className={`p-2 ${inputStyles} rounded-lg w-full outline-none`}
             name='client_post_code'
             required
             defaultValue={requiredInvoice?.clientAddress.postCode || ''}
@@ -72,7 +74,7 @@ const ClientInputs = ({
       <p>Country</p>
       <input
         type='text'
-        className='w-full bg-slate-800 p-2 rounded-lg my-2 outline-none'
+        className={`w-full ${inputStyles} p-2 rounded-lg my-2 outline-none`}
         name='client_country'
         required
         defaultValue={requiredInvoice?.clientAddress.country || ''}
@@ -83,7 +85,7 @@ const ClientInputs = ({
           <p>Invoice Date</p>
           <input
             type='date'
-            className='p-2 bg-slate-800 rounded-lg w-full outline-none'
+            className={`p-2 ${inputStyles} rounded-lg w-full outline-none`}
             name='invoice_date'
             required
             defaultValue={requiredInvoice?.createdAt || ''}
@@ -94,7 +96,7 @@ const ClientInputs = ({
           <p>Payment Terms</p>
           <input
             type='text'
-            className='p-2 bg-slate-800 rounded-lg w-full outline-none'
+            className={`p-2 ${inputStyles} rounded-lg w-full outline-none`}
             name='payment_terms'
             defaultValue={`Net ${
               requiredInvoice ? requiredInvoice?.paymentTerms : selectedTerm
@@ -110,7 +112,13 @@ const ClientInputs = ({
           </div>
 
           {showTerms && (
-            <div className='bg-slate-700 px-4 rounded-lg font-bold text-slate-100 absolute w-full mt-3'>
+            <div
+              className={`${
+                theme === 'dark'
+                  ? 'bg-slate-700'
+                  : 'bg-slate-300 text-slate-900'
+              } px-4 rounded-lg font-bold text-slate-100 absolute w-full mt-3`}
+            >
               {termOptions.map((option, index) => {
                 return (
                   <p
@@ -136,7 +144,7 @@ const ClientInputs = ({
       <p>Description</p>
       <input
         type='text'
-        className='w-full bg-slate-800 p-2 rounded-lg my-2 outline-none mb-4'
+        className={`w-full ${inputStyles} p-2 rounded-lg my-2 outline-none mb-4`}
         placeholder='e.g. Graphic Design Service'
         name='description'
         required
@@ -160,7 +168,7 @@ const ClientInputs = ({
           })}
         </div>
         <button
-          className='bg-slate-800 w-full rounded-full py-2 font-bold text-sm'
+          className={`${inputStyles} w-full rounded-full py-2 font-bold text-sm`}
           onClick={(e) => {
             e.preventDefault()
             const itemDetails = {
