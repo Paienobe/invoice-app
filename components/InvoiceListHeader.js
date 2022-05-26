@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'
 import { useGlobalContext } from '../context/globalContext'
 
 const InvoiceListHeader = ({ setShowForm }) => {
-  const { state } = useGlobalContext()
+  const { state, activeFilter, setActiveFilter } = useGlobalContext()
+  const filters = ['paid', 'pending', 'draft']
+  const [showFilters, setShowFilters] = useState(false)
   return (
     <div className='flex items-center justify-between sm:mb-12 lg:w-4/5'>
       <div className='sm:w-2/4'>
@@ -13,7 +15,12 @@ const InvoiceListHeader = ({ setShowForm }) => {
         </p>
       </div>
 
-      <div className='flex items-center'>
+      <div
+        className='flex items-center relative'
+        onClick={() => {
+          setShowFilters(!showFilters)
+        }}
+      >
         <p className='text-sm font-semibold mr-2 sm:text-base'>Filter</p>
         <Image
           src='/images/icon-arrow-down.svg'
@@ -21,6 +28,34 @@ const InvoiceListHeader = ({ setShowForm }) => {
           height={8}
           alt='arrow'
         />
+        {showFilters && (
+          <div className='absolute bg-slate-700 p-4 rounded-lg top-8'>
+            {filters.map((filter, index) => {
+              return (
+                <div
+                  key={index}
+                  className='flex items-center my-1 cursor-pointer'
+                  onClick={() => {
+                    if (activeFilter === filter) {
+                      setActiveFilter('')
+                    } else {
+                      setActiveFilter(filter)
+                    }
+                  }}
+                >
+                  <div
+                    className={`${
+                      activeFilter === filter ? 'bg-purple-700' : 'bg-gray-800'
+                    } text-transparent mr-4 rounded-xl`}
+                  >
+                    ...
+                  </div>
+                  <p>{filter}</p>
+                </div>
+              )
+            })}
+          </div>
+        )}
       </div>
 
       <div
