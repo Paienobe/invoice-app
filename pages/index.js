@@ -4,9 +4,10 @@ import { useState } from 'react'
 import InvoiceForm from '../components/InvoiceForm'
 import InvoiceListContainer from '../components/InvoiceListContainer'
 import InvoiceListHeader from '../components/InvoiceListHeader'
+import { useGlobalContext } from '../context/globalContext'
 
 export default function Home() {
-  const [showForm, setShowForm] = useState(false)
+  const { showForm, setShowForm } = useGlobalContext()
   return (
     <div className='bg-slate-900 min-h-screen text-slate-100 font-Jost overflow-x-hidden '>
       <Head>
@@ -18,7 +19,6 @@ export default function Home() {
       <main className='p-4 relative sm:p-12 lg:px-48 mt-16 lg:flex lg:flex-col items-center lg:mt-0'>
         <InvoiceListHeader setShowForm={setShowForm} />
         <InvoiceListContainer showForm={showForm} setShowForm={setShowForm} />
-        {/* <InvoiceForm showForm={showForm} setShowForm={setShowForm} /> */}
       </main>
     </div>
   )

@@ -21,7 +21,7 @@ const InvoiceBody = ({ requiredInvoice }) => {
       </div>
 
       <div className='flex justify-between flex-wrap sm:mb-8'>
-        <div className='flex flex-col justify-between'>
+        <div className='flex flex-col justify-between w-1/2 sm:w-auto'>
           <div>
             <p className='text-slate-400'>Invoice Date</p>
             <p className='font-bold text-lg'>{requiredInvoice?.createdAt}</p>
@@ -33,23 +33,23 @@ const InvoiceBody = ({ requiredInvoice }) => {
           </div>
         </div>
 
-        <div>
+        <div className='w-1/2 sm:w-auto'>
           <p className='text-slate-400'>Bill To</p>
           <div>
             <p className='text-slate-100 font-bold'>
               {requiredInvoice?.clientName}
             </p>
             <p className='text-slate-400 text-sm'>
-              {requiredInvoice?.senderAddress.street}
+              {requiredInvoice?.clientAddress.street}
             </p>
             <p className='text-slate-400 text-sm'>
-              {requiredInvoice?.senderAddress.city}
+              {requiredInvoice?.clientAddress.city}
             </p>
             <p className='text-slate-400 text-sm'>
-              {requiredInvoice?.senderAddress.postCode}
+              {requiredInvoice?.clientAddress.postCode}
             </p>
             <p className='text-slate-400 text-sm'>
-              {requiredInvoice?.senderAddress.country}
+              {requiredInvoice?.clientAddress.country}
             </p>
           </div>
         </div>
