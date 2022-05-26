@@ -52,6 +52,21 @@ const AppProvider = ({ children }) => {
   const [showForm, setShowForm] = useState(false)
   const [isEditing, setIsEditing] = useState(false)
   const [activeFilter, setActiveFilter] = useState('')
+  const [theme, setTheme] = useState('dark')
+
+  const pageStyles = `${
+    theme === 'dark'
+      ? 'bg-slate-900 text-slate-100'
+      : 'bg-slate-500 text-slate-900'
+  }`
+
+  const invoiceItemStyle = `${
+    theme === 'dark' ? 'bg-slate-800' : 'bg-slate-100'
+  }`
+
+  const invoiceStyle = `${theme === 'dark' ? 'bg-slate-800' : 'bg-slate-100'}`
+
+  const inputStyles = `${theme === 'dark' ? 'bg-slate-800' : 'bg-slate-300'}`
 
   return (
     <AppContext.Provider
@@ -67,6 +82,12 @@ const AppProvider = ({ children }) => {
         setIsEditing,
         activeFilter,
         setActiveFilter,
+        theme,
+        setTheme,
+        pageStyles,
+        invoiceItemStyle,
+        invoiceStyle,
+        inputStyles,
       }}
     >
       {children}

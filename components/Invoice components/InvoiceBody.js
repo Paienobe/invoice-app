@@ -1,8 +1,10 @@
 import React from 'react'
+import { useGlobalContext } from '../../context/globalContext'
 
 const InvoiceBody = ({ requiredInvoice }) => {
+  const { invoiceStyle } = useGlobalContext()
   return (
-    <div className='bg-slate-800 p-4 my-4 rounded-lg mb-24'>
+    <div className={`${invoiceStyle} p-4 my-4 rounded-lg mb-24`}>
       <div className='sm:flex sm:items-start sm:justify-between'>
         <div>
           <p className='font-bold'>
@@ -62,7 +64,7 @@ const InvoiceBody = ({ requiredInvoice }) => {
 
       <div className='bg-slate-700 rounded-lg overflow-hidden'>
         <div>
-          <div className='hidden sm:flex items-center px-4 pt-4'>
+          <div className='hidden sm:flex items-center px-4 pt-4 text-slate-100'>
             <p className='w-2/5'>Item Name</p>
             <p className='w-1/5'>QTY</p>
             <p className='w-1/5'>Price</p>
@@ -71,7 +73,7 @@ const InvoiceBody = ({ requiredInvoice }) => {
           {requiredInvoice?.items.map((item, index) => {
             return (
               <div
-                className='font-semibold flex items-center justify-between px-4 py-6 text-sm'
+                className='font-semibold flex items-center justify-between px-4 py-6 text-sm text-slate-100'
                 key={index}
               >
                 <p className='sm:w-2/5'>{item.name}</p>
@@ -83,7 +85,7 @@ const InvoiceBody = ({ requiredInvoice }) => {
           })}
         </div>
 
-        <div className='font-semibold text-sm flex items-center justify-between px-4 py-6 bg-black'>
+        <div className='font-semibold text-sm flex items-center justify-between px-4 py-6 bg-black text-slate-100'>
           <p>Amount Due </p>
           <p className='text-xl'>£{requiredInvoice?.total}</p>
         </div>

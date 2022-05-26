@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { useGlobalContext } from '../context/globalContext'
 
 const InvoiceListHeader = ({ setShowForm }) => {
-  const { state, activeFilter, setActiveFilter } = useGlobalContext()
+  const { state, activeFilter, setActiveFilter, theme } = useGlobalContext()
   const filters = ['paid', 'pending', 'draft']
   const [showFilters, setShowFilters] = useState(false)
   return (
@@ -29,7 +29,11 @@ const InvoiceListHeader = ({ setShowForm }) => {
           alt='arrow'
         />
         {showFilters && (
-          <div className='absolute bg-slate-700 p-4 rounded-lg top-8'>
+          <div
+            className={`absolute ${
+              theme === 'dark' ? 'bg-slate-700' : 'bg-slate-300'
+            } p-4 rounded-lg top-8`}
+          >
             {filters.map((filter, index) => {
               return (
                 <div
@@ -45,7 +49,7 @@ const InvoiceListHeader = ({ setShowForm }) => {
                 >
                   <div
                     className={`${
-                      activeFilter === filter ? 'bg-purple-700' : 'bg-gray-800'
+                      activeFilter === filter ? 'bg-purple-700' : 'bg-gray-500'
                     } text-transparent mr-4 rounded-xl`}
                   >
                     ...
@@ -67,7 +71,7 @@ const InvoiceListHeader = ({ setShowForm }) => {
         <div className='w-7 h-7  flex items-center justify-center rounded-full bg-slate-100'>
           <Image src='/images/icon-plus.svg' width={10} height={10} alt='+' />
         </div>
-        <p className='font-semibold text-sm ml-2'>
+        <p className='font-semibold text-sm ml-2 text-slate-100'>
           New <span className='hidden sm:inline'>Invoice</span>
         </p>
       </div>

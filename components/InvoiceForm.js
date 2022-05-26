@@ -6,7 +6,7 @@ import FormEditButtons from './form components/FormEditButtons'
 import SenderInputs from './form components/SenderInputs'
 
 const InvoiceForm = ({ showForm, setShowForm, requiredInvoice }) => {
-  const { createInvoice, isEditing, setIsEditing } = useGlobalContext()
+  const { createInvoice, isEditing, pageStyles, theme } = useGlobalContext()
   const invoiceFormRef = useRef(null)
   const [itemsList, setItemsList] = useState([])
   const termOptions = [1, 7, 14, 30]
@@ -64,12 +64,18 @@ const InvoiceForm = ({ showForm, setShowForm, requiredInvoice }) => {
         !showForm
           ? '-left-full mr-96'
           : 'left-0 right-0 sm:right-[20vw] sm:border-4 sm:border-purple-700 sm:border-opacity-70'
-      } px-4 bg-slate-900 text-slate-400 invoice-form sm:py-10 sm:px-20 lg:px-56 lg:h-screen sm:rounded-r-3xl ${
+      } px-4 ${
+        theme === 'dark' ? 'bg-slate-900' : 'bg-slate-100 text-slate-900'
+      } text-slate-400 invoice-form sm:py-10 sm:px-20 lg:px-56 lg:h-screen sm:rounded-r-3xl ${
         isEditing && 'pt-20'
       }`}
       ref={invoiceFormRef}
     >
-      <h1 className='text-xl font-bold my-4 text-slate-100'>
+      <h1
+        className={`text-xl font-bold my-4 ${
+          theme === 'dark' ? 'text-slate-100' : 'text-slate-900'
+        }`}
+      >
         {!isEditing ? 'Create Invoice' : 'Edit Invoice'}
       </h1>
       <div className=''>

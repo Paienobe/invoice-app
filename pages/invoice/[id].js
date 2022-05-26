@@ -11,7 +11,7 @@ import DeleteModal from '../../components/DeleteModal'
 import InvoiceForm from '../../components/InvoiceForm'
 
 const DetailedInvoice = () => {
-  const { state } = useGlobalContext()
+  const { state, pageStyles } = useGlobalContext()
   const router = useRouter()
   const invoiceID = router.query?.id?.toLowerCase()
   const requiredInvoice = state.find((invoice) => {
@@ -39,7 +39,9 @@ const DetailedInvoice = () => {
   const { showForm, setShowForm } = useGlobalContext()
 
   return (
-    <div className='bg-slate-900 min-h-screen p-4 text-slate-100 relative font-Jost pt-20 sm:pt-28 sm:px-14 lg:px-80 lg:pt-8'>
+    <div
+      className={`${pageStyles} min-h-screen p-4 relative font-Jost pt-20 sm:pt-28 sm:px-14 lg:px-80 lg:pt-8`}
+    >
       <Head>
         <title>Invoice/{invoiceID?.toUpperCase()}</title>
       </Head>
