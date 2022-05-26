@@ -51,6 +51,7 @@ const AppProvider = ({ children }) => {
 
   const [showForm, setShowForm] = useState(false)
   const [isEditing, setIsEditing] = useState(false)
+  const [activeFilter, setActiveFilter] = useState('')
 
   return (
     <AppContext.Provider
@@ -64,6 +65,8 @@ const AppProvider = ({ children }) => {
         setShowForm,
         isEditing,
         setIsEditing,
+        activeFilter,
+        setActiveFilter,
       }}
     >
       {children}

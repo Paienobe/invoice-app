@@ -96,10 +96,9 @@ const ClientInputs = ({
             type='text'
             className='p-2 bg-slate-800 rounded-lg w-full outline-none'
             name='payment_terms'
-            defaultValue={
-              `Net ${requiredInvoice?.paymentTerms} Days` ||
-              `Net ${selectedTerm} Days`
-            }
+            defaultValue={`Net ${
+              requiredInvoice ? requiredInvoice?.paymentTerms : selectedTerm
+            } Days`}
           />
           <div
             className='absolute top-8 right-4 cursor-pointer'
