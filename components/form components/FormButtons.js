@@ -1,6 +1,13 @@
 import React from 'react'
+import { useGlobalContext } from '../../context/globalContext'
 
-const FormButtons = ({ setShowForm }) => {
+const FormButtons = ({
+  setShowForm,
+  invoiceFormRef,
+  itemsList,
+  selectedTerm,
+}) => {
+  const { createInvoice } = useGlobalContext()
   return (
     <div className='flex items-center justify-between my-6'>
       <button
@@ -14,7 +21,21 @@ const FormButtons = ({ setShowForm }) => {
       </button>
 
       <div className='flex items-center w-2/3'>
-        <button className='p-2 py-4 rounded-full text-xs font-bold bg-gray-500 text-slate-100 w-1/2 mr-1'>
+        <button
+          className='p-2 py-4 rounded-full text-xs font-bold bg-gray-500 text-slate-100 w-1/2 mr-1'
+          onClick={(e) => {
+            {
+              e.preventDefault()
+              createInvoice(
+                invoiceFormRef.current,
+                itemsList,
+                selectedTerm,
+                'draft'
+              )
+              setShowForm(false)
+            }
+          }}
+        >
           Save as Draft
         </button>
         <button

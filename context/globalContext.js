@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useReducer } from 'react'
+import React, { useContext, useEffect, useReducer, useState } from 'react'
 import { reducer, initialState } from '../reducer/reducer'
 const AppContext = React.createContext()
 
@@ -20,13 +20,19 @@ const AppProvider = ({ children }) => {
     }
   }, [state])
 
-  const createInvoice = (formContent, generatedItems, selectedTerms) => {
+  const createInvoice = (
+    formContent,
+    generatedItems,
+    selectedTerms,
+    statusType
+  ) => {
     dispatch({
       type: 'CREATE_INVOICE',
       payload: {
         content: formContent,
         items: generatedItems,
         terms: selectedTerms,
+        statusType,
       },
     })
   }
@@ -39,6 +45,13 @@ const AppProvider = ({ children }) => {
     dispatch({ type: 'DELETE', payload: { id } })
   }
 
+  const editInvoice = (id, content, items, terms) => {
+    dispatch({ type: 'EDIT', payload: { id, content, items, terms } })
+  }
+
+  const [showForm, setShowForm] = useState(false)
+  const [isEditing, setIsEditing] = useState(false)
+
   return (
     <AppContext.Provider
       value={{
@@ -46,6 +59,11 @@ const AppProvider = ({ children }) => {
         createInvoice,
         markInvoiceAsPaid,
         deleteInvoice,
+        editInvoice,
+        showForm,
+        setShowForm,
+        isEditing,
+        setIsEditing,
       }}
     >
       {children}

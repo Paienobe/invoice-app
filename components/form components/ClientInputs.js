@@ -1,14 +1,16 @@
 import React, { useState } from 'react'
-import { AiFillDelete } from 'react-icons/ai'
 import Image from 'next/image'
+import FormItem from './FormItem'
 
 const ClientInputs = ({
   itemsList,
   setItemsList,
-  itemOnChangeEvent,
+  itemTotalCalulation,
   termOptions,
   selectedTerm,
   setSelectedTerm,
+  itemNameInput,
+  requiredInvoice,
 }) => {
   const [showTerms, setShowTerms] = useState(false)
   return (
@@ -21,6 +23,7 @@ const ClientInputs = ({
         className='w-full p-2 bg-slate-800 rounded-lg mb-4'
         name='client_name'
         required
+        defaultValue={requiredInvoice?.clientName || ''}
       />
 
       <p>Client&apos;s Email</p>
@@ -30,6 +33,7 @@ const ClientInputs = ({
         placeholder='e.g. email@example.com'
         name='client_email'
         required
+        defaultValue={requiredInvoice?.clientEmail || ''}
       />
 
       <p>Street Address</p>
@@ -38,6 +42,7 @@ const ClientInputs = ({
         className='w-full p-2 bg-slate-800 rounded-lg'
         name='client_street'
         required
+        defaultValue={requiredInvoice?.clientAddress.street || ''}
       />
 
       <div className='flex items-center my-4'>
@@ -48,6 +53,7 @@ const ClientInputs = ({
             className='p-2 bg-slate-800 rounded-lg w-full outline-none'
             name='client_city'
             required
+            defaultValue={requiredInvoice?.clientAddress.city || ''}
           />
         </div>
 
@@ -58,6 +64,7 @@ const ClientInputs = ({
             className='p-2 bg-slate-800 rounded-lg w-full outline-none'
             name='client_post_code'
             required
+            defaultValue={requiredInvoice?.clientAddress.postCode || ''}
           />
         </div>
       </div>
@@ -68,6 +75,7 @@ const ClientInputs = ({
         className='w-full bg-slate-800 p-2 rounded-lg my-2 outline-none'
         name='client_country'
         required
+        defaultValue={requiredInvoice?.clientAddress.country || ''}
       />
 
       <div className='flex items-center my-4'>
@@ -78,6 +86,7 @@ const ClientInputs = ({
             className='p-2 bg-slate-800 rounded-lg w-full outline-none'
             name='invoice_date'
             required
+            defaultValue={requiredInvoice?.createdAt || ''}
           />
         </div>
 
@@ -87,7 +96,10 @@ const ClientInputs = ({
             type='text'
             className='p-2 bg-slate-800 rounded-lg w-full outline-none'
             name='payment_terms'
-            defaultValue={`Net ${selectedTerm} Days`}
+            defaultValue={
+              `Net ${requiredInvoice?.paymentTerms} Days` ||
+              `Net ${selectedTerm} Days`
+            }
           />
           <div
             className='absolute top-8 right-4 cursor-pointer'
@@ -129,6 +141,7 @@ const ClientInputs = ({
         placeholder='e.g. Graphic Design Service'
         name='description'
         required
+        defaultValue={requiredInvoice?.description || ''}
       />
 
       <div>
@@ -136,71 +149,14 @@ const ClientInputs = ({
         <div className='items_container'>
           {itemsList.map((item, index) => {
             return (
-              <div
+              <FormItem
                 key={index}
-                className='my-4 sm:flex sm:items-center sm:justify-between'
-              >
-                <div className='sm:mr-4 sm:w-2/3'>
-                  <p>Item Name</p>
-                  <input
-                    type='text'
-                    className='w-full bg-slate-800 p-2 rounded-lg my-2 outline-none mb-4 sm:my-0'
-                    required
-                    value={itemsList[index].name}
-                    onChange={(e) => {
-                      itemOnChangeEvent(index, 'name', e.target.value)
-                    }}
-                  />
-                </div>
-                <div className='flex items-start'>
-                  <div className='w-1/2 flex items-center'>
-                    <div className='mr-4'>
-                      <p>Qty.</p>
-                      <input
-                        type='number'
-                        className='w-full bg-slate-800 p-2 rounded-lg outline-none'
-                        required
-                        value={itemsList[index].quantity}
-                        onChange={(e) => {
-                          itemOnChangeEvent(
-                            index,
-                            'quantity',
-                            e.target.value,
-                            'price'
-                          )
-                        }}
-                      />
-                    </div>
-                    <div>
-                      <p>Price</p>
-                      <input
-                        type='number'
-                        className='w-full bg-slate-800 p-2 rounded-lg outline-none'
-                        required
-                        value={itemsList[index].price}
-                        onChange={(e) => {
-                          itemOnChangeEvent(
-                            index,
-                            'price',
-                            e.target.value,
-                            'quantity'
-                          )
-                        }}
-                      />
-                    </div>
-                  </div>
-
-                  <div className='flex items-center w-1/2 ml-8'>
-                    <div className='w-1/2'>
-                      <p>Total</p>
-                      <p>{itemsList[index].total}</p>
-                    </div>
-                    <div className='w-1/2 hover:text-red-500 cursor-pointer'>
-                      <AiFillDelete />
-                    </div>
-                  </div>
-                </div>
-              </div>
+                index={index}
+                itemNameInput={itemNameInput}
+                itemTotalCalulation={itemTotalCalulation}
+                itemsList={itemsList}
+                setItemsList={setItemsList}
+              />
             )
           })}
         </div>
@@ -209,6 +165,7 @@ const ClientInputs = ({
           onClick={(e) => {
             e.preventDefault()
             const itemDetails = {
+              id: Date.now(),
               name: '',
               quantity: 0,
               price: 0,
